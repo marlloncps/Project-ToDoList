@@ -12,7 +12,9 @@ function App() {
 
     setTask(value);
   };
-
+  const funcTeste = () => {
+    console.log('teste')
+  }
   
 
   return (
@@ -24,7 +26,7 @@ function App() {
           funcionalidades.
         </h6>
         <div>
-          <Input onInputChange={handleInputChange} />
+          <Input teste={funcTeste}onInputChange={handleInputChange} />
         </div>
         <List />
       </main>

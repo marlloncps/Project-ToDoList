@@ -8,6 +8,8 @@ import { InputState, InputProps } from '../Interfaces';
 export default class Input extends Component<InputProps, InputState> {
   constructor(props: InputProps) {
     super(props);
+    console.log(props);
+    
     this.state = {
       inputValue: '',
     };
@@ -37,7 +39,7 @@ export default class Input extends Component<InputProps, InputState> {
             </label>
 
             <FontAwesomeIcon
-              onClick={() => console.log('ola')}
+              onClick={this.props.teste}
               id='icon-add'
               icon={faPlus}
             />
