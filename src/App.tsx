@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './styles/App.css';
+import Input from './Components/Input';
+import List from './Components/List';
+
 
 function App() {
+  const [task, setTask] = useState('');
+  
+  const handleInputChange = (value: string) => {
+    console.log(value);
+
+    setTask(value);
+  };
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <main>
+        <h1>Bem vindo ao ToDoList</h1>
+        <h6>
+          Uma lista de tarefas desenvolvida em TypeScript + React com várias
+          funcionalidades.
+        </h6>
+        <div>
+          <Input onInputChange={handleInputChange} />
+        </div>
+        <List />
+      </main>
+    </>
   );
 }
 
