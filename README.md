@@ -1,1 +1,1 @@
-# Project-ToDoList
+# Projeto ToDoList desenvolvido em React com TypeScript
