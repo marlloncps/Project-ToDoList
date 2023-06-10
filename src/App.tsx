@@ -1,21 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/App.css';
 import Input from './Components/Input';
-import List from './Components/List';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
+
+function TaskItem({ value, index, onDelete }: { value: string, index: number, onDelete: (index: number) => void }) {
+  return (
+    <li className='item'>
+      {value}
+      <FontAwesomeIcon
+        onClick={() => onDelete(index)}
+        id='icon-del'
+        icon={faDeleteLeft}
+      />
+    </li>
+  );
+}
 
 
 function App() {
-  const [task, setTask] = useState('');
-  
-  const handleInputChange = (value: string) => {
-    console.log(value);
+  const [tasks, setTasks] = useState<string[]>([]);
 
-    setTask(value);
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    const arrayTasks = storedTasks ? JSON.parse(storedTasks) : [];
+    setTasks(arrayTasks);
+  }, []);
+
+  const addTask = (value: string) => {
+    if (value === '') return 
+    const updatedTasks = [...tasks, value];
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
-  const funcTeste = () => {
-    console.log('teste')
-  }
-  
+
+  const deleteTask = (index: number) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
 
   return (
     <>
@@ -26,9 +49,22 @@ function App() {
           funcionalidades.
         </h6>
         <div>
-          <Input teste={funcTeste}onInputChange={handleInputChange} />
+          <Input push={addTask} />
         </div>
-        <List />
+        <section>
+          <div className='list'>
+            <ul>
+              {tasks.map((task, index) => (
+                <TaskItem
+                  key={index}
+                  value={task}
+                  index={index}
+                  onDelete={deleteTask}
+                />
+              ))}
+            </ul>
+          </div>
+        </section>
       </main>
     </>
   );
