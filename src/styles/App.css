@@ -205,3 +205,22 @@ li:first-child {
 ::-webkit-scrollbar-thumb:hover {
   background: #19647e;
 }
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item:focus {
+  border: 1px solid red;
+}
+
+#icon-del {
+  transition: all 0.3s linear;
+  height: 25px;
+}
+
+#icon-del:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}

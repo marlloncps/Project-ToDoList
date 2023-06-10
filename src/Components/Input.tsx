@@ -8,14 +8,18 @@ import { InputState, InputProps } from '../Interfaces';
 export default class Input extends Component<InputProps, InputState> {
   constructor(props: InputProps) {
     super(props);
+
     this.state = {
       inputValue: '',
     };
     library.add(faPlus);
+    this.inputHandleChange = this.inputHandleChange.bind(this);
   }
 
   inputHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+    this.setState({
+      inputValue: event.target.value,
+    });
   };
   render() {
     return (
@@ -28,6 +32,7 @@ export default class Input extends Component<InputProps, InputState> {
               placeholder='Name'
               name='name'
               id='name'
+              value={this.state.inputValue}
               onChange={this.inputHandleChange}
               autoComplete='off'
               required
@@ -37,7 +42,12 @@ export default class Input extends Component<InputProps, InputState> {
             </label>
 
             <FontAwesomeIcon
-              onClick={() => console.log('ola')}
+              onClick={() => {
+                this.props.push(this.state.inputValue);
+                this.setState({
+                  inputValue: ''
+                })
+              }}
               id='icon-add'
               icon={faPlus}
             />
