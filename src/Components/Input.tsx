@@ -29,8 +29,8 @@ export default class Input extends Component<InputProps, InputState> {
             <input
               type='input'
               className='form__field'
-              placeholder='Name'
-              name='name'
+              placeholder='Tarefa'
+              name='input-list'
               id='name'
               value={this.state.inputValue}
               onChange={this.inputHandleChange}
